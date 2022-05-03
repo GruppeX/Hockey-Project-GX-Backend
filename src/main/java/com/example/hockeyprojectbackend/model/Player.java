@@ -2,9 +2,21 @@ package com.example.hockeyprojectbackend.model;
 
 import javax.persistence.*;
 
+/**
+ * Player model class from JPA
+ * @Entity creater tabel in mySQL
+ * @auth Christoffer
+ */
 @Entity
 public class Player {    //Christoffer 12:00
 
+  /**
+   * Creates autoincremented ID for our column player_id
+   * @Id = PrimaryKey
+   * @Column = name for specific column
+   * @GeneratedValue = Autoincremented value
+   * @auth Christoffer
+   */
   @Id
   @Column(name = "player_id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +35,12 @@ public class Player {    //Christoffer 12:00
   @Column(nullable = false)
   private boolean isSelected;
 
+  /**
+   * Joining players with position class
+   * @OneToOne makes relationship between 1 column
+   * @JoinColumn Joining column of other table
+   * @auth Christoffer
+   */
   @OneToOne
   @JoinColumn(name = "position_id")
   private Position position;
