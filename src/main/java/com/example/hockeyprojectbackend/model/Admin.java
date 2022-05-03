@@ -2,10 +2,23 @@ package com.example.hockeyprojectbackend.model;
 
 import javax.persistence.*;
 
+/**
+ * Admin model class from JPA
+ *
+ * @Entity creater tabel in mySQL
+ * @auth Christoffer
+ */
 @Entity
 public class Admin {
 
-
+  /**
+   * Creates autoincremented ID for our column admin_id
+   *
+   * @Id = PrimaryKey
+   * @Column = name for specific column
+   * @GeneratedValue = Autoincremented value
+   * @auth Christoffer
+   */
   @Id
   @Column(name = "admin_id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +30,6 @@ public class Admin {
 
   @Column(nullable = false)
   private String password;
-
 
 
   public String getUsername() {
