@@ -1,6 +1,9 @@
 package com.example.hockeyprojectbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.Builder;
+import com.sun.istack.NotNull;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -36,20 +39,30 @@ public class Player {    //Christoffer 12:00
   @Column(nullable = false)
   private String role;
 
-  @Column(nullable = true)
-  private boolean isSelected = false;
+  @Column(nullable = false, columnDefinition = "boolean default false")
+  private boolean isSelected;
 
   /**
    * Joining player with position class
    *
-   * @OneToOne makes relationship between 1 column
+   * @OneToOne makes relationship between 1 column, CascadeType on both classes so we can add a player to a position
+   * and a position to a player
    * @JoinColumn Joining column of other table
    * @auth Christoffer
    */
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "position_id")
   private Position position;
 
+
+
+  public int getPlayerId() {
+    return playerId;
+  }
+
+  public void setPlayerId(int playerId) {
+    this.playerId = playerId;
+  }
 
   public String getFirstName() {
     return firstName;
@@ -75,11 +88,19 @@ public class Player {    //Christoffer 12:00
     this.role = role;
   }
 
-  public boolean isSelected() {
+  public Boolean getSelected() {
     return isSelected;
   }
 
-  public void setSelected(boolean selected) {
+  public void setSelected(Boolean selected) {
     isSelected = selected;
+  }
+
+  public Position getPosition() {
+    return position;
+  }
+
+  public void setPosition(Position position) {
+    this.position = position;
   }
 }
