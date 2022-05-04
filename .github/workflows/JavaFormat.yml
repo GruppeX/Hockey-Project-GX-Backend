@@ -29,6 +29,6 @@ jobs:
             git gc
             git config user.name "GitHub Actions"
             git config user.email ""
-            git commit -m "${GITHUB_REF} Google Java Format" --author="${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>" -a
+            git commit -m "$GITHUB_REF Google Java Format" --author="${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>" -a
             git push
           fi
