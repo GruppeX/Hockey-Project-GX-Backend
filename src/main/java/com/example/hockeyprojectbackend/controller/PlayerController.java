@@ -56,7 +56,7 @@ public interface PlayerController {
      */
 
     @DeleteMapping("/delete/player/{id}")
-    public Player deletePlayer(@PathVariable int id);
+    public ResponseEntity<String> deletePlayer(@PathVariable int id);
 
 
 }
