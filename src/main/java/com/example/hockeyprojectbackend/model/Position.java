@@ -1,5 +1,7 @@
 package com.example.hockeyprojectbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 /**
@@ -36,6 +38,7 @@ public class Position {
    */
   @OneToOne
   @JoinColumn(name = "player_id")
+  @JsonBackReference
   private Player player;
 
 

@@ -1,5 +1,7 @@
 package com.example.hockeyprojectbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -34,8 +36,8 @@ public class Player {    //Christoffer 12:00
   @Column(nullable = false)
   private String role;
 
-  @Column(nullable = false)
-  private boolean isSelected;
+  @Column(nullable = true)
+  private boolean isSelected = false;
 
   /**
    * Joining player with position class
