@@ -9,11 +9,17 @@ import java.util.List;
 
 
 /**
- * @auth All
+ * @author All
  * Interface class
- *
  * @RestController - combination of @Controller @ResponseBody
  * @CrossOrigin - enables cross-origin resource sharing only for this file specific class or method.
+ */
+
+/**
+ * Interface class for players
+ * Hold CRUD, for players
+ *
+ * @author Jackie, Christoffer, Jens and Vitaliy
  */
 
 @RestController
@@ -29,16 +35,35 @@ public interface PlayerController {
      * If it returns unsuccessfully it will send an exception.
      * @RequestBody - HttpRequest body onto a Java object.
      * Spring automatically deserializes the JSON into a Java type (player object), assuming an appropriate one is specified.
+     *
+     *
      */
 
+    /**
+     * Create a player in the database.
+     * When done it returns a HTTP response 200 (OK)
+     * Mapping is /create/player
+     *
+     * @param player - given player to create.
+     * @return A HTTP response
+     * @author Jackie and Christoffer
+     */
     @PostMapping("/create/player")
     @ResponseStatus(HttpStatus.CREATED)
-    public Player createPlayer(@RequestBody Player player);
+    public ResponseEntity<String> createPlayer(@RequestBody Player player);
 
     /**
      * @GetMapping - when we get something from our project/ database
+     *
      */
 
+    /**
+     * Get a list of players from the database.
+     * The mapping is /show/players
+     *
+     * @return A list of players
+     * @author Jackie and Christoffer
+     */
     @GetMapping("/show/players")
     public List<Player> getAllPlayers();
 
@@ -46,17 +71,35 @@ public interface PlayerController {
      * @PutMapping - method is used to update the resource and @PutMapping annotation for mapping HTTP PUT requests onto specific handler methods.
      * @PathVariable - would be an endpoint that identifies an entity with a primary key {id}.
      * @RequestBody - HttpRequest body onto a Java object.
+     *
+     *
+     */
+
+    /**
+     * update a player from the database from given id
+     * The mapping is /show/players
+     *
+     * @param id     - player id
+     * @param player - updated player in JSON
+     * @return A HTTP response
+     * @author Jackie and Christoffer
      */
     @PutMapping("/update/player/{id}")
-    public ResponseEntity<Player> updatePlayer(@PathVariable int id, @RequestBody Player player);
+    public ResponseEntity<String> updatePlayer(@PathVariable int id, @RequestBody Player player);
 
     /**
      * @DeleteMapping - when we delete something from our project/ database
      * @PathVariable - would be an endpoint that identifies an entity with a primary key {id}.
      */
 
+    /**
+     * Delete an activity found by id, delete from database
+     *
+     * @param id    - player id
+     * @return A HTTP response
+     * @author Jackie and Christoffer
+     */
     @DeleteMapping("/delete/player/{id}")
     public ResponseEntity<String> deletePlayer(@PathVariable int id);
-
 
 }

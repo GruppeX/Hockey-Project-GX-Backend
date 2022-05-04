@@ -8,45 +8,82 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
 public class PlayerControllerImpl implements PlayerController {
 
-  @Autowired
-  PlayerRepository playerRepository;
-
-  @GetMapping("/")
-  public String welcome() {
-    return "test";
-  }
+    @Autowired
+    PlayerRepository playerRepository;
 
 
-  @PostMapping("/create/player") // ???? behøver man skrive annotationerne begge steder selve klassen og interface
-  @ResponseStatus(HttpStatus.CREATED) // ???
-  public Player createPlayer(@RequestBody Player player) {
-    return playerRepository.save(player);
-  }
-
-  @GetMapping("/get/players")
-  public List<Player> getAllPlayers() {
-    return playerRepository.findAll();
-  }
-
-
-  @Override
-  public ResponseEntity<Player> updatePlayer(int id, Player player) {
-    return null;
-  }
-
-
-  @DeleteMapping("/delete/player/{id}")
-  public ResponseEntity<String> deletePlayer(@PathVariable int id) {
-    try {
-      playerRepository.deleteById(id);
-      return new ResponseEntity<>("delete id = " + id, HttpStatus.OK);
-    } catch (Exception err) {
-      return new ResponseEntity<>("Could not id at all = " + id, HttpStatus.NOT_FOUND);
+    /**
+     * Create a player
+     *
+     * @param player - Given player to create.
+     * @return A HTTP response
+     * @author Jackie and Christoffer
+     */
+    @Override
+    public ResponseEntity<String> createPlayer(Player player) {
+        try {
+            playerRepository.save(player);
+        } catch (Exception e) { //TODO: fix exception to custom
+            return new ResponseEntity<>("Player not created\nError: " + e, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>("Player created", HttpStatus.OK);
     }
-  }
+
+    /**
+     * Get a list of players
+     *
+     * @return A list of players
+     * @author Jackie and Christoffer
+     */
+    @Override
+    public List<Player> getAllPlayers() {
+        return playerRepository.findAll();
+    }
+
+    /**
+     * Update a player, by id
+     *
+     * @param id     - Player id
+     * @param player - Updated player in JSON
+     * @return A HTTP response
+     * @author Jackie and Christoffer
+     */
+    @Override
+    public ResponseEntity<String> updatePlayer(int id, Player player) {
+        player.setPlayerId(id); //Make sure it's the same id on the given player and the id
+        Optional<Player> updatedPlayer = playerRepository.findById(id);
+        try {
+            if (updatedPlayer.isPresent()) {
+                playerRepository.save(player);
+            } else {
+                return new ResponseEntity<>("Player not Updated", HttpStatus.NOT_ACCEPTABLE);
+            }
+        } catch (Exception e) { //TODO: fix exception to custom
+            return new ResponseEntity<>("Player not Updated\nError: " + e, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>("Player Updated", HttpStatus.OK);
+    }
+
+    /**
+     * Delete a player
+     *
+     * @param id    - player id
+     * @return A HTTP response
+     * @author Jackie and Christoffer
+     */
+    @Override
+    public ResponseEntity<String> deletePlayer(int id) {
+        try {
+            playerRepository.deleteById(id);
+            return new ResponseEntity<>("Deleted id: " + id, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Could not find id: " + id + "\nError: " + e, HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 }
