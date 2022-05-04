@@ -5,8 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 
 public class InitData implements CommandLineRunner {
 
-@Autowired //repos
-
-@Override
-public void run(String... args) throws Exception {}
+  @Autowired // repos
+  @Override
+  public void run(String... args) throws Exception {}
 }
