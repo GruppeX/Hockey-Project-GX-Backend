@@ -9,10 +9,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 /**
- * AdminController class
- *
- * @RestController ...
- * @CrossOrigin ...
+ * AdminController interface
+ * *
  * @auth Vitaliy
  */
 

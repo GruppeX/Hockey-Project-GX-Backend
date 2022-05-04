@@ -11,10 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * AdminController class
+ * AdminController interface implementation
  *
- * @RestController ...
- * @CrossOrigin ...
  * @auth Vitaliy
  */
 
