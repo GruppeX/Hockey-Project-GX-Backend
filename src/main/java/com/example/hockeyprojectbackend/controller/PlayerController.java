@@ -7,14 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-/**
- * @author All
- * Interface class
- * @RestController - combination of @Controller @ResponseBody
- * @CrossOrigin - enables cross-origin resource sharing only for this file specific class or method.
- */
-
 /**
  * Interface class for players
  * Hold CRUD, for players
@@ -22,10 +14,7 @@ import java.util.List;
  * @author Jackie, Christoffer, Jens and Vitaliy
  */
 
-@RestController
-@CrossOrigin
 public interface PlayerController {
-
 
     /**
      * Creates players to our project
@@ -95,7 +84,7 @@ public interface PlayerController {
     /**
      * Delete an activity found by id, delete from database
      *
-     * @param id    - player id
+     * @param id - player id
      * @return A HTTP response
      * @author Jackie and Christoffer
      */
