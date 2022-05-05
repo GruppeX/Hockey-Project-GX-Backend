@@ -91,7 +91,7 @@ public class Player {    //Christoffer 12:00
         return this.isSelected;
     }
 
-    public void setSelected(boolean isSelected) {
+    public void setIsSelected(boolean isSelected) {
         this.isSelected = isSelected;
     }
 
