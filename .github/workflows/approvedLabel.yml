@@ -1,29 +1,16 @@
-name: "Label when approved"
+name: Label approved pull requests
+
 on: pull_request_review
 
 jobs:
-
-  label-when-approved:
-    name: "Label when approved"
+  labelWhenApproved:
+    name: Label when approved
     runs-on: ubuntu-latest
     steps:
-      - name: "Get information about the original trigger of the run"
-        uses: potiuk/get-workflow-origin@v1_2
-        id: source-run-info
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          sourceRunId: ${{ github.event.workflow_run.id }}
-      - name: Label when approved by anyone
-        uses: TobKed/label-when-approved-action@v1.2
-        id: label-when-approved-by-anyone
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          require_committers_approval: 'true'
-          label: 'Ready to merge'
-          comment: 'PR approved and no changes requested.'
-          pullRequestNumber: ${{ steps.source-run-info.outputs.pullRequestNumber }}
-      - name: remove labels
-        uses: andymckay/labeler@5c59dabdfd4dd5bd9c6e6d255b01b9d764af4414
-        with:
-          remove-labels: "Ready for review"
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Label when approved
+      uses: pullreminders/label-when-approved-action@master
+      env:
+        APPROVALS: "1"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ADD_LABEL: "Ready to merge"
+        REMOVE_LABEL: "Ready for review"
