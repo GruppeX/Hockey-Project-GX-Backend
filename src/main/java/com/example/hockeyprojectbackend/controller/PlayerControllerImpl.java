@@ -64,7 +64,7 @@ public class PlayerControllerImpl implements PlayerController {
             } else {
                 return new ResponseEntity<>("Player not Updated", HttpStatus.NOT_ACCEPTABLE);
             }
-        } catch (Exception e) { //TODO: fix exception to custom
+        }  catch (Exception e){ //TODO: fix exception to custom
             return new ResponseEntity<>("Player not Updated\nError: " + e, HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity<>("Player Updated", HttpStatus.OK);

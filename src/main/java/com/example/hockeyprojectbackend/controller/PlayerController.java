@@ -17,6 +17,7 @@ import java.util.List;
 public interface PlayerController {
 
     /**
+     * Bonus note for annotations
      * Creates players to our project
      *
      * @PostMapping - is used to handle POST type of request method, etc.
@@ -24,7 +25,6 @@ public interface PlayerController {
      * If it returns unsuccessfully it will send an exception.
      * @RequestBody - HttpRequest body onto a Java object.
      * Spring automatically deserializes the JSON into a Java type (player object), assuming an appropriate one is specified.
-     *
      *
      */
 
@@ -35,13 +35,14 @@ public interface PlayerController {
      *
      * @param player - given player to create.
      * @return A HTTP response
-     * @author Jackie and Christoffer
+     * @author Jackie, Christoffer, Jens and Vitaliy
      */
     @PostMapping("/create/player")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> createPlayer(@RequestBody Player player);
 
     /**
+     * Bonus note for annotations
      * @GetMapping - when we get something from our project/ database
      *
      */
@@ -51,16 +52,16 @@ public interface PlayerController {
      * The mapping is /show/players
      *
      * @return A list of players
-     * @author Jackie and Christoffer
+     * @author Jackie, Christoffer, Jens and Vitaliy
      */
     @GetMapping("/show/players")
     public List<Player> getAllPlayers();
 
     /**
+     * Bonus note for annotations
      * @PutMapping - method is used to update the resource and @PutMapping annotation for mapping HTTP PUT requests onto specific handler methods.
      * @PathVariable - would be an endpoint that identifies an entity with a primary key {id}.
      * @RequestBody - HttpRequest body onto a Java object.
-     *
      *
      */
 
@@ -71,12 +72,13 @@ public interface PlayerController {
      * @param id     - player id
      * @param player - updated player in JSON
      * @return A HTTP response
-     * @author Jackie and Christoffer
+     * @author Jackie, Christoffer, Jens and Vitaliy
      */
     @PutMapping("/update/player/{id}")
     public ResponseEntity<String> updatePlayer(@PathVariable int id, @RequestBody Player player);
 
     /**
+     * Bonus note for annotations
      * @DeleteMapping - when we delete something from our project/ database
      * @PathVariable - would be an endpoint that identifies an entity with a primary key {id}.
      */
@@ -86,7 +88,7 @@ public interface PlayerController {
      *
      * @param id - player id
      * @return A HTTP response
-     * @author Jackie and Christoffer
+     * @author Jackie, Christoffer, Jens and Vitaliy
      */
     @DeleteMapping("/delete/player/{id}")
     public ResponseEntity<String> deletePlayer(@PathVariable int id);
