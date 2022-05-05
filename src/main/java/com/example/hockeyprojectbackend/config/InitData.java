@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class InitData implements CommandLineRunner {
+  
+  
+  
+  
+  
+  
 
   @Autowired PlayerRepository playerRepository;
 
