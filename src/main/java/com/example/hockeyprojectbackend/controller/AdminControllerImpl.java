@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * AdminController interface implementation
  *
- * @auth Vitaliy
+ * @author Vitaliy
  */
 
 @RestController
@@ -21,41 +21,22 @@ import java.util.Optional;
 public class AdminControllerImpl implements AdminController {
 
   @Autowired
-   static AdminRepository adminRepository;
+  AdminRepository adminRepository;
 
-  /**
-   * Get a list of all admins in the system
-   *
-   * @return list of admins
-   */
-  @GetMapping("/admins")
-  public  List<Admin> getAllAdmins() {
+
+  @Override
+  public List<Admin> getAllAdmins() {
     return adminRepository.findAll();
   }
 
-  /**
-   * Create an admin, get a request body in json. send data to database and save the admin
-   * object in database.
-   *
-   * @param admin data containing admin object
-   * @return Entity
-   */
-  @PostMapping("/create/admin")
-  @ResponseStatus(HttpStatus.CREATED)
-    public Admin postAdmin(@RequestBody Admin admin) {
+
+  @Override
+  public Admin postAdmin(Admin admin) {
     return adminRepository.save(admin);
   }
 
-  /**
-   * Update an admin, by id of the admin that needs update, and update with new request-body.
-   *
-   * @param id adminId
-   * @param admin admin object with updated information
-   * @return a Entity with complete msg
-   */
-  @PutMapping("/update/admin/{id}")
-  public ResponseEntity<Admin> updateAdmin(
-      @PathVariable int id, @RequestBody Admin admin) {
+  @Override
+  public ResponseEntity<Admin> updateAdmin(int id, Admin admin) {
     admin.setAdminId(id);
     Optional<Admin> optionalAdmin = adminRepository.findById(id);
     if (optionalAdmin.isPresent()) {
@@ -68,15 +49,8 @@ public class AdminControllerImpl implements AdminController {
     }
   }
 
-  /**
-   * Delete an admin find by id, delete from database
-   *
-   * @param id adminId
-   * @return Entity msg if delete or not delete
-   */
-
-  @DeleteMapping("/delete/admin/{id}")
-  public ResponseEntity<String> deleteAdmin(@PathVariable int id) {
+  @Override
+  public ResponseEntity<String> deleteAdmin(int id) {
     try {
       adminRepository.deleteById(id);
       return new ResponseEntity<>("delete id = " + id, HttpStatus.OK);
