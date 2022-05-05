@@ -21,7 +21,7 @@ public class InitData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Position position = new Position();
+        /*Position position = new Position();
         Player player = new Player();
         position.setPlayer(player);
         position.setPositionName("Ab");
@@ -31,6 +31,6 @@ public class InitData implements CommandLineRunner {
         player.setRole("ab");
         positionRepository.save(position);
         playerRepository.save(player);
-        System.out.println("Inde i init data");
+        System.out.println("Inde i init data");*/
     }
 }

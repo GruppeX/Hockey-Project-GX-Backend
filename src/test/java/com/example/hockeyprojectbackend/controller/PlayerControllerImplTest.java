@@ -2,100 +2,105 @@ package com.example.hockeyprojectbackend.controller;
 
 import com.example.hockeyprojectbackend.model.Player;
 import com.example.hockeyprojectbackend.repository.PlayerRepository;
-import com.example.hockeyprojectbackend.repository.PositionRepository;
-import org.hibernate.UnsupportedLockAttemptException;
-import org.hibernate.hql.internal.ast.tree.ExpectedTypeAwareNode;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.Assert;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class PlayerControllerImplTest {
+@AutoConfigureTestDatabase
+@ActiveProfiles("test")
+@TestPropertySource(locations = "classpath:application-test.properties")
+public class PlayerControllerImplTest {
 
+    @Autowired
+    private PlayerRepository playerRepository;
 
-  @Autowired
-  PlayerRepository playerRepository;
-  @Autowired
-  PlayerControllerImpl playerControllerImpl;
+    @BeforeEach
+    public void beforeTest() {
+        playerRepository.deleteAll();
 
-  @Test
-  void testCreatePlayerWithCorrectInfo() {
-    //Arrange
-    Player player = new Player();
-    player.setFirstName("Hans");
-    player.setLastName("Hansen");
-    player.setRole("Field");
-    player.setSelected(true);
+        Player player = new Player();
+        player.setPlayerId(1);
+        player.setFirstName("Hans");
+        player.setRole("GoalKeeper");
+        player.setLastName("Hansen");
+        player.setIsSelected(false);
+        playerRepository.save(player);
 
-    //Act
-    ResponseEntity newPlayer = playerControllerImpl.createPlayer(player);
+        player = new Player();
+        player.setPlayerId(2);
+        player.setFirstName("Kurt");
+        player.setRole("GoalKeeper2");
+        player.setLastName("Jensen");
+        player.setIsSelected(false);
+        playerRepository.save(player);
 
-    //Assert
-    assertEquals(newPlayer.getStatusCode(), HttpStatus.OK);
-  }
+    }
 
-//  @Test
-//  void testCreatePlayerWithIncorrectInfo() {
-//    //Arrange
-//    Player player = new Player();
-//    player.setFirstName(null);
-//    player.setLastName("Hansen");
-//    player.setRole("Field");
-//    player.setSelected(true);
-//
-//    //Act
-//    //ResponseEntity newPlayer = playerControllerImpl.createPlayer(player);
-//
-//    //Assert
-//    assertThrowsExactly(Exception.class, ()-> {
-//      playerControllerImpl.createPlayer(player);
-//    });
-//  }
+    @Test
+    public void findAllPlayersTest() {
+        //Get a list of all players
+        List<Player> players = playerRepository.findAll();
 
-  @Test
-  void getAllPlayers() {
+        //Expected players in list (2 are made as default first)
+        int expectedPlayers = 2;
 
-    List<Player> players = playerControllerImpl.getAllPlayers();
+        assertThat(players).hasSize(expectedPlayers);
+    }
 
-    assertTrue(players.size() != 0);
+    @Test
+    public void createNewPlayerTest() {
+        //Create a player with id
+        Player player = new Player();
+        player.setPlayerId(10);
+        player.setFirstName("Name");
+        player.setRole("GoalKeeper");
+        player.setLastName("lastName");
+        player.setIsSelected(false);
+        playerRepository.save(player);
 
-  }
+        //Find player
+        Optional<Player> playerById = playerRepository.findById(10);
 
+        assertThat(playerById).isNotNull();
+    }
 
-  @Test
-  void updatePlayer() {
-    int playerId = 1;
-    Player oldPlayer = playerRepository.findById(playerId).get();
-    oldPlayer.setFirstName("Joe");
+    @Test
+    public void updatePlayerNameTest() {
+        Optional<Player> playerById = playerRepository.findById(1);
 
-    ResponseEntity<String> playerUpdate =
-        playerControllerImpl.updatePlayer(playerId, oldPlayer);
-    Player playerUpdated = playerRepository.findById(playerId).get();
+        Player newPlayer = playerById.orElse(null);
+        if (newPlayer != null) {
+            newPlayer.setFirstName("Gert");
+            playerRepository.save(newPlayer);
+        }
 
-    assertEquals(oldPlayer.getFirstName(), playerUpdated.getFirstName());
-    assertEquals(playerUpdate.getStatusCode(), HttpStatus.OK);
+        //Is player null
+        assertThat(newPlayer).isNotNull();
+        //Name is correct
+        assertEquals("Gert", newPlayer.getFirstName());
+    }
 
-    //Skal denne kunne skrives om til original eller lige meget???
+    @Test
+    public void deletePlayerByIdTest() {
+        //Delete player by id 1
+        playerRepository.deleteById(1);
 
-    // For at få orginal titlen tilbage igen efter testen
-//    Activity activityRestore = activityRepository.findById(activityId).get();
-//    activityRestore.setActivityTitle("goCart");
-//    Activity activityUpdate1 = activityRepository.save(activityRestore);
-//    org.assertj.core.api.Assertions.assertThat(activityUpdate1.getActivityTitle()).isEqualTo("goCart");
-  }
+        //Find player
+        Optional<Player> findPlayer = playerRepository.findById(1);
 
-  @Test
-  void deletePlayer() {
-  }
+        //If player not present it works
+        assertThat(findPlayer.isPresent()).isFalse();
+    }
+
 }
