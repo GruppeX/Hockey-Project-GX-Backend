@@ -39,7 +39,6 @@ public class Position {
    */
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "player_id")
-  @JsonBackReference
   private Player player;
 
 
