@@ -1,6 +1,5 @@
 package com.example.hockeyprojectbackend.model;
 
-
 import javax.persistence.*;
 
 /**

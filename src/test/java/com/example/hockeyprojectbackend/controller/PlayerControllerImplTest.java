@@ -75,10 +75,10 @@ public class PlayerControllerImplTest {
 
   @Test
   public void updatePlayerNameTest() {
-    //Find player by id
+    // Find player by id
     Optional<Player> playerById = playerRepository.findById(1);
 
-    //Create a player by the found player, if not exist, it's null
+    // Create a player by the found player, if not exist, it's null
     Player newPlayer = playerById.orElse(null);
     if (newPlayer != null) {
       newPlayer.setFirstName("Gert");
