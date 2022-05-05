@@ -34,8 +34,10 @@ public class Admin {
 
   /**
    * Getter and setter for adminId parameter
+   *
    * @auth Vitaliy
    */
+
 
   public int getAdminId() {
     return adminId;
