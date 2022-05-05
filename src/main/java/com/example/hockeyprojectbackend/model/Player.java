@@ -8,13 +8,12 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 
 /**
- * Player model class from JPA
+ * Player model class from JPA @Entity creater tabel in mySQL
  *
- * @Entity creater tabel in mySQL
  * @auth Christoffer
  */
 @Entity
-public class Player {    //Christoffer 12:00
+public class Player { // Christoffer 12:00
 
     /**
      * Creates autoincremented ID for our column player_id
