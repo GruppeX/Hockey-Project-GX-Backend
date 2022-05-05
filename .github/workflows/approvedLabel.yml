@@ -22,3 +22,8 @@ jobs:
           label: 'Ready to merge'
           comment: 'PR approved and no changes requested.'
           pullRequestNumber: ${{ steps.source-run-info.outputs.pullRequestNumber }}
+      - name: remove labels
+        uses: andymckay/labeler@5c59dabdfd4dd5bd9c6e6d255b01b9d764af4414
+        with:
+          remove-labels: "Ready for review"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
