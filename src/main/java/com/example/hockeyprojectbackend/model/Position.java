@@ -28,11 +28,10 @@ public class Position {
 
   /**
    * Joining position with player class @OneToOne makes relationship between 1 column @JoinColumn
+   * Joining column of other table @OneToOne makes relationship between 1 column, CascadeType on
+   * both classes so we can add a player to a position and a position to a player @JoinColumn
    * Joining column of other table
    *
-   * @OneToOne makes relationship between 1 column, CascadeType on both classes so we can add a player to a position
-   * and a position to a player
-   * @JoinColumn Joining column of other table
    * @auth Christoffer
    */
   @OneToOne(cascade = CascadeType.ALL)
