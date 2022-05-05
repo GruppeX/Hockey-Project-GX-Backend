@@ -2,7 +2,6 @@ package com.example.hockeyprojectbackend.controller;
 
 import com.example.hockeyprojectbackend.model.Player;
 import com.example.hockeyprojectbackend.repository.PlayerRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -23,102 +22,99 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestPropertySource(locations = "classpath:application-test.properties")
 public class PlayerControllerImplTest {
 
-    @Autowired
-    private PlayerRepository playerRepository;
+  @Autowired private PlayerRepository playerRepository;
 
-    @BeforeTestMethod
-    public void beforeTest() {
-        playerRepository.deleteAll();
-    }
+  @BeforeTestMethod
+  public void beforeTest() {
+    playerRepository.deleteAll();
+  }
 
-    @Test
-    public void findAllPlayersTest() {
-        // Add players
-        Player player = new Player();
-        player.setPlayerId(1);
-        player.setFirstName("Hans");
-        player.setRole("GoalKeeper");
-        player.setLastName("Hansen");
-        player.setIsSelected(false);
-        playerRepository.save(player);
+  @Test
+  public void findAllPlayersTest() {
+    // Add players
+    Player player = new Player();
+    player.setPlayerId(1);
+    player.setFirstName("Hans");
+    player.setRole("GoalKeeper");
+    player.setLastName("Hansen");
+    player.setIsSelected(false);
+    playerRepository.save(player);
 
-        player = new Player();
-        player.setPlayerId(2);
-        player.setFirstName("Kurt");
-        player.setRole("GoalKeeper2");
-        player.setLastName("Jensen");
-        player.setIsSelected(false);
-        playerRepository.save(player);
-        // Get a list of all players
-        List<Player> players = playerRepository.findAll();
-        System.out.println(players);
+    player = new Player();
+    player.setPlayerId(2);
+    player.setFirstName("Kurt");
+    player.setRole("GoalKeeper2");
+    player.setLastName("Jensen");
+    player.setIsSelected(false);
+    playerRepository.save(player);
+    // Get a list of all players
+    List<Player> players = playerRepository.findAll();
+    System.out.println(players);
 
-        // Expected players in list (2 are made as default first)
-        int expectedPlayers = 2;
+    // Expected players in list (2 are made as default first)
+    int expectedPlayers = 2;
 
-        assertThat(players).hasSize(expectedPlayers);
-    }
+    assertThat(players).hasSize(expectedPlayers);
+  }
 
-    @Test
-    public void createNewPlayerTest() {
-        // Create a player with id
-        Player player = new Player();
-        player.setPlayerId(10);
-        player.setFirstName("Name");
-        player.setRole("GoalKeeper");
-        player.setLastName("lastName");
-        player.setIsSelected(false);
-        playerRepository.save(player);
+  @Test
+  public void createNewPlayerTest() {
+    // Create a player with id
+    Player player = new Player();
+    player.setPlayerId(10);
+    player.setFirstName("Name");
+    player.setRole("GoalKeeper");
+    player.setLastName("lastName");
+    player.setIsSelected(false);
+    playerRepository.save(player);
 
-        // Find player
-        Optional<Player> playerById = playerRepository.findById(10);
+    // Find player
+    Optional<Player> playerById = playerRepository.findById(10);
 
-        assertThat(playerById).isNotNull();
-    }
+    assertThat(playerById).isNotNull();
+  }
 
-    @Test
-    public void updatePlayerNameTest() {
+  @Test
+  public void updatePlayerNameTest() {
 
-        //Given player
-        Player player = new Player();
-        player.setPlayerId(1);
-        player.setFirstName("Hans");
-        player.setRole("GoalKeeper");
-        player.setLastName("Hansen");
-        player.setIsSelected(false);
+    // Given player
+    Player player = new Player();
+    player.setPlayerId(1);
+    player.setFirstName("Hans");
+    player.setRole("GoalKeeper");
+    player.setLastName("Hansen");
+    player.setIsSelected(false);
 
+    // Create a player by the found player, if not exist, it's null
+    Player newPlayer = player;
 
-        // Create a player by the found player, if not exist, it's null
-        Player newPlayer = player;
+    newPlayer.setFirstName("Gert");
+    playerRepository.save(newPlayer);
 
-        newPlayer.setFirstName("Gert");
-        playerRepository.save(newPlayer);
+    // Is player null
+    assertThat(newPlayer).isNotNull();
+    // Name is correct
+    assertEquals("Gert", newPlayer.getFirstName());
+  }
 
+  @Test
+  public void deletePlayerByIdTest() {
 
-        // Is player null
-        assertThat(newPlayer).isNotNull();
-        // Name is correct
-        assertEquals("Gert", newPlayer.getFirstName());
-    }
+    // Given player
+    Player player = new Player();
+    player.setPlayerId(1);
+    player.setFirstName("Hans");
+    player.setRole("GoalKeeper");
+    player.setLastName("Hansen");
+    player.setIsSelected(false);
 
-    @Test
-    public void deletePlayerByIdTest() {
+    // Delete player by id 1
+    playerRepository.deleteById(1);
 
-        //Given player
-        Player player = new Player();
-        player.setPlayerId(1);
-        player.setFirstName("Hans");
-        player.setRole("GoalKeeper");
-        player.setLastName("Hansen");
-        player.setIsSelected(false);
+    // Find player
+    Optional<Player> findPlayer = playerRepository.findById(1);
 
-        // Delete player by id 1
-        playerRepository.deleteById(1);
-
-        // Find player
-        Optional<Player> findPlayer = playerRepository.findById(1);
-
-        // If player not present it works
-        assertThat(findPlayer.isPresent()).isFalse();
-    }
+    // If player not present it works
+    assertThat(findPlayer.isPresent()).isFalse();
+  }
 }
