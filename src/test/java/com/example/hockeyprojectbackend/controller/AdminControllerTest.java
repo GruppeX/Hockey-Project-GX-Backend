@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * @author Vitaliy
@@ -46,6 +48,48 @@ public class AdminControllerTest {
 
     Optional<Admin> optionalAdmin = adminRepository.findById(1);
     assertThat(optionalAdmin.isPresent()).isTrue();
+  }
+
+  @Test
+  public void updateAdminTest() {
+    Admin admin = new Admin();
+    admin.setAdminId(1);
+    admin.setUsername("admin100");
+    admin.setPassword("password100");
+    adminRepository.save(admin);
+
+    Admin newAdmin = new Admin();
+    newAdmin.setAdminId(1);
+    newAdmin.setUsername("admin123");
+    newAdmin.setPassword("password100");
+
+    adminController.updateAdmin(1, newAdmin);
+
+    Optional<Admin> optionalAdmin = adminRepository.findById(1);
+    assertThat(optionalAdmin.isPresent()).isTrue();
+
+    assertEquals("admin123", optionalAdmin.get().getUsername());
+  }
+
+  @Test
+  public void updateAdminWithWrongIdTest() {
+    Admin admin = new Admin();
+    admin.setAdminId(1);
+    admin.setUsername("admin100");
+    admin.setPassword("password100");
+    adminRepository.save(admin);
+
+    Admin newAdmin = new Admin();
+    newAdmin.setAdminId(1);
+    newAdmin.setUsername("admin123");
+    newAdmin.setPassword("password100");
+
+    adminController.updateAdmin(2, newAdmin);
+
+    Optional<Admin> optionalAdmin = adminRepository.findById(1);
+    assertThat(optionalAdmin.isPresent()).isTrue();
+
+    assertNotEquals("admin123", optionalAdmin.get().getUsername());
   }
 
 }
