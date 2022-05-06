@@ -23,7 +23,6 @@ public class AdminControllerImpl implements AdminController {
 
   @Override
   public ResponseEntity<List<Admin>> getAdmin(String username) {
-
     return new ResponseEntity<List<Admin>>(adminRepository.findByUsername(username), HttpStatus.OK);
   }
 
