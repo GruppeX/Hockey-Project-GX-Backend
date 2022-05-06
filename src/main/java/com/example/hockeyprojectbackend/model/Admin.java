@@ -27,6 +27,19 @@ public class Admin {
   @Column(nullable = false)
   private String password;
 
+  /**
+   * Getter and setter for adminId parameter
+   *
+   * @auth Vitaliy
+   */
+  public int getAdminId() {
+    return adminId;
+  }
+
+  public void setAdminId(int adminId) {
+    this.adminId = adminId;
+  }
+
   public String getUsername() {
     return username;
   }
