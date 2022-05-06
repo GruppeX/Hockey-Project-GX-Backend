@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * AdminController interface
@@ -32,8 +33,8 @@ public interface AdminController {
    *
    * @return list of admins
    */
-  @GetMapping("/admins")
-  List<Admin> getAllAdmins();
+  @GetMapping("/admin")
+  ResponseEntity<List<Admin>> getAdmin(@RequestParam String username);
 
   /**
    * Update an admin, by id of the admin that needs update, and update with new request-body.

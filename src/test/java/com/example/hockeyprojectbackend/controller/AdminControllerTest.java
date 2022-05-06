@@ -5,8 +5,11 @@ import com.example.hockeyprojectbackend.repository.AdminRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +18,9 @@ import java.util.Optional;
  * @author Vitaliy
  */
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureTestDatabase
+@ActiveProfiles("test")
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class AdminControllerTest {
 
   @Autowired private AdminRepository adminRepository;

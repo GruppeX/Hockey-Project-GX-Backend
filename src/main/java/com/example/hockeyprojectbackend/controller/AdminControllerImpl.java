@@ -22,8 +22,9 @@ public class AdminControllerImpl implements AdminController {
   @Autowired AdminRepository adminRepository;
 
   @Override
-  public List<Admin> getAllAdmins() {
-    return adminRepository.findAll();
+  public ResponseEntity<List<Admin>> getAdmin(String username) {
+
+    return new ResponseEntity<List<Admin>>(adminRepository.findByUsername(username), HttpStatus.OK);
   }
 
   @Override
