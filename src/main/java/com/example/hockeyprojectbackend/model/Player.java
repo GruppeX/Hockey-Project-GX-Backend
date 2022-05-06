@@ -1,5 +1,7 @@
 package com.example.hockeyprojectbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 /**
@@ -8,7 +10,7 @@ import javax.persistence.*;
  * @author Christoffer
  */
 @Entity
-public class Player { // Christoffer 12:00
+public class Player {
 
   /**
    * Creates autoincremented ID for our column player_id @Id = PrimaryKey @Column = name for
@@ -42,6 +44,7 @@ public class Player { // Christoffer 12:00
    */
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "position_id")
+  @JsonBackReference
   private Position position;
 
   public int getPlayerId() {
