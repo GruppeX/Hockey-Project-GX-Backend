@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * Player model class from JPA @Entity creater tabel in mySQL
  *
- * @auth Christoffer
+ * @author Christoffer
  */
 @Entity
 public class Player { // Christoffer 12:00
@@ -14,7 +14,7 @@ public class Player { // Christoffer 12:00
    * Creates autoincremented ID for our column player_id @Id = PrimaryKey @Column = name for
    * specific column @GeneratedValue = Autoincremented value
    *
-   * @auth Christoffer
+   * @author Christoffer
    */
   @Id
   @Column(name = "player_id")
@@ -30,18 +30,27 @@ public class Player { // Christoffer 12:00
   @Column(nullable = false)
   private String role;
 
-  @Column(nullable = false)
+  @Column(nullable = false, columnDefinition = "boolean default false")
   private boolean isSelected;
 
   /**
-   * Joining player with position class @OneToOne makes relationship between 1 column @JoinColumn
+   * Joining player with position class @OneToOne makes relationship between 1 column, CascadeType
+   * on both classes so we can add a player to a position and a position to a player @JoinColumn
    * Joining column of other table
    *
-   * @auth Christoffer
+   * @author Christoffer
    */
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "position_id")
   private Position position;
+
+  public int getPlayerId() {
+    return playerId;
+  }
+
+  public void setPlayerId(int playerId) {
+    this.playerId = playerId;
+  }
 
   public String getFirstName() {
     return firstName;
@@ -68,10 +77,18 @@ public class Player { // Christoffer 12:00
   }
 
   public boolean isSelected() {
-    return isSelected;
+    return this.isSelected;
   }
 
-  public void setSelected(boolean selected) {
-    isSelected = selected;
+  public void setIsSelected(boolean isSelected) {
+    this.isSelected = isSelected;
+  }
+
+  public Position getPosition() {
+    return position;
+  }
+
+  public void setPosition(Position position) {
+    this.position = position;
   }
 }

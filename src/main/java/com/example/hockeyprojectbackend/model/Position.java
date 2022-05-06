@@ -26,13 +26,23 @@ public class Position {
 
   /**
    * Joining position with player class @OneToOne makes relationship between 1 column @JoinColumn
+   * Joining column of other table @OneToOne makes relationship between 1 column, CascadeType on
+   * both classes so we can add a player to a position and a position to a player @JoinColumn
    * Joining column of other table
    *
    * @auth Christoffer
    */
-  @OneToOne
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "player_id")
   private Player player;
+
+  public int getPositionId() {
+    return positionId;
+  }
+
+  public void setPositionId(int positionId) {
+    this.positionId = positionId;
+  }
 
   public String getPositionName() {
     return positionName;
@@ -40,5 +50,13 @@ public class Position {
 
   public void setPositionName(String positionName) {
     this.positionName = positionName;
+  }
+
+  public Player getPlayer() {
+    return player;
+  }
+
+  public void setPlayer(Player player) {
+    this.player = player;
   }
 }
