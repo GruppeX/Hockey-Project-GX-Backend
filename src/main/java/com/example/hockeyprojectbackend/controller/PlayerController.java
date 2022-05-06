@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface PlayerController {
 
-  /**
+  /*
    * Bonus note for annotations Creates players to our project @PostMapping - is used to handle POST
    * type of request method, etc. @ResponseStatus - if it returns successfully, Spring provides a
    * HTTP 200 (OK) response. If it returns unsuccessfully it will send an exception. @RequestBody -
@@ -34,7 +34,7 @@ public interface PlayerController {
   @ResponseStatus(HttpStatus.CREATED)
   public ResponseEntity<String> createPlayer(@RequestBody Player player);
 
-  /** Bonus note for annotations @GetMapping - when we get something from our project/ database */
+  /* Bonus note for annotations @GetMapping - when we get something from our project/ database */
 
   /**
    * Get a list of players from the database. The mapping is /show/players
@@ -45,7 +45,7 @@ public interface PlayerController {
   @GetMapping("/show/players")
   public List<Player> getAllPlayers();
 
-  /**
+  /*
    * Bonus note for annotations @PutMapping - method is used to update the resource and @PutMapping
    * annotation for mapping HTTP PUT requests onto specific handler methods. @PathVariable - would
    * be an endpoint that identifies an entity with a primary key {id}. @RequestBody - HttpRequest
@@ -63,7 +63,7 @@ public interface PlayerController {
   @PutMapping("/update/player/{id}")
   public ResponseEntity<String> updatePlayer(@PathVariable int id, @RequestBody Player player);
 
-  /**
+  /*
    * Bonus note for annotations @DeleteMapping - when we delete something from our project/
    * database @PathVariable - would be an endpoint that identifies an entity with a primary key
    * {id}.

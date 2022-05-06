@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * Player model class from JPA @Entity creater tabel in mySQL
  *
- * @auth Christoffer
+ * @author Christoffer
  */
 @Entity
 public class Player { // Christoffer 12:00
@@ -14,7 +14,7 @@ public class Player { // Christoffer 12:00
    * Creates autoincremented ID for our column player_id @Id = PrimaryKey @Column = name for
    * specific column @GeneratedValue = Autoincremented value
    *
-   * @auth Christoffer
+   * @author Christoffer
    */
   @Id
   @Column(name = "player_id")
@@ -38,7 +38,7 @@ public class Player { // Christoffer 12:00
    * on both classes so we can add a player to a position and a position to a player @JoinColumn
    * Joining column of other table
    *
-   * @auth Christoffer
+   * @author Christoffer
    */
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "position_id")
