@@ -32,5 +32,4 @@ public interface PositionController {
    */
   @GetMapping("/show/positions")
   public List<Position> getAllPositions();
-
 }

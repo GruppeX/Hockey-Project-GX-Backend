@@ -14,8 +14,7 @@ import java.util.List;
 @CrossOrigin
 public class PositionControllerImpl implements PositionController {
 
-  @Autowired
-  PositionRepository positionRepository;
+  @Autowired PositionRepository positionRepository;
 
   /**
    * Create a position
