@@ -9,9 +9,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Vitaliy
@@ -23,24 +26,26 @@ import java.util.Optional;
 public class AdminControllerTest {
 
   @Autowired private AdminRepository adminRepository;
+  @Autowired private AdminControllerImpl adminController;
+
+
+  @BeforeTestMethod
+  public void beforeTest() {
+    adminRepository.deleteAll();
+  }
 
   /** Test to create an admin */
   @Test
   public void createAdminTest() {
     Admin admin = new Admin();
-    admin.setAdminId(100);
+    admin.setAdminId(1);
     admin.setUsername("admin100");
     admin.setPassword("password100");
-    adminRepository.save(admin);
 
-    Optional<Admin> optionalAdmin = adminRepository.findById(100);
-    Assertions.assertNotNull(optionalAdmin);
+    adminController.postAdmin(admin);
+
+    Optional<Admin> optionalAdmin = adminRepository.findById(1);
+    assertThat(optionalAdmin.isPresent()).isTrue();
   }
 
-  /** Test to se if there are any admins exists */
-  @Test
-  public void testAreThereAnyAdmins() {
-    List<Admin> admins = adminRepository.findAll();
-    Assertions.assertNotNull(admins);
-  }
 }
