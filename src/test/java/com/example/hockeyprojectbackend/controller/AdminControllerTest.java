@@ -88,5 +88,4 @@ public class AdminControllerTest {
 
     assertNotEquals("admin123", optionalAdmin.get().getUsername());
   }
-
 }
