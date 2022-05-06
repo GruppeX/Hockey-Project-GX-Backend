@@ -32,8 +32,6 @@ public class Admin {
    *
    * @auth Vitaliy
    */
-
-
   public int getAdminId() {
     return adminId;
   }
@@ -58,4 +56,3 @@ public class Admin {
     this.password = password;
   }
 }
-

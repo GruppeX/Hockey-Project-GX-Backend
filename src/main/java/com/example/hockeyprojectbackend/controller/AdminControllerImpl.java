@@ -15,20 +15,16 @@ import java.util.Optional;
  *
  * @author Vitaliy
  */
-
 @RestController
 @CrossOrigin
 public class AdminControllerImpl implements AdminController {
 
-  @Autowired
-  AdminRepository adminRepository;
-
+  @Autowired AdminRepository adminRepository;
 
   @Override
   public List<Admin> getAllAdmins() {
     return adminRepository.findAll();
   }
-
 
   @Override
   public Admin postAdmin(Admin admin) {
