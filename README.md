@@ -1,3 +1,4 @@
+
 # Hockey Field (System Development exam)
 
 A brief description of what this project does and who it's for
@@ -16,15 +17,15 @@ Commit your Changes (git commit -m 'Add some AmazingFeature')
 
 Push to the Branch (git push origin feature/AmazingFeature)
 
+Open a Pull Request
+
 ## Built with
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 Bootstrap
 
 
-Open a Pull Request
 ## Authors
-- [@Christoffer Pedersen](https://github.com/Dubz97)
 
 - [@Jens Kristian Monteiro Madsen](https://github.com/Jens-k-m-m)
 
@@ -33,3 +34,5 @@ Open a Pull Request
 - [@Jakob Majid](https://github.com/jakobmajiddd)
 
 - [@Vitaliy Serdyukov](https://github.com/vitaliy-serdyukov)
+
+- [@Christoffer Pedersen](https://github.com/Dubz97)
