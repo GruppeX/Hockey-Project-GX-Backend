@@ -1,38 +1,39 @@
+# Title
 
-# Hockey Field (System Development exam)
+# Description
 
-A brief description of what this project does and who it's for
+${data.Description}
 
+* [Installation](#installation)
 
-## Contributing to Hockey Field Project
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+* [Usage](#usage)
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
+* [License](#license)
 
-Fork the Project
+* [Contributing](#contributing)
 
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
+* [Tests](#tests)
 
-Commit your Changes (git commit -m 'Add some AmazingFeature')
+# Installation
 
-Push to the Branch (git push origin feature/AmazingFeature)
+The following necessary dependencies must be installed to run the application properly: ${data.Installation}
 
-Open a Pull Request
+# Usage
 
-## Built with
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+​This application is used for ${data.Usage}
 
-Bootstrap
+# License
 
+This project is license under the ${data.License} license.
 
-## Authors
+# Contributing
 
-- [@Jens Kristian Monteiro Madsen](https://github.com/Jens-k-m-m)
+​Contributors: ${data.Contributor}
 
-- [@Jackie Hartvig Jensen](https://github.com/Jarkyman)
+# Tests
 
-- [@Jakob Majid](https://github.com/jakobmajiddd)
+To run tests, you need to run the following command: ${data.Test}
 
-- [@Vitaliy Serdyukov](https://github.com/vitaliy-serdyukov)
+# Questions
 
-- [@Christoffer Pedersen](https://github.com/Dubz97)
+If you have any questions about the repo, open an issue or contact ${data.UserName} directly ${data.Email}.
