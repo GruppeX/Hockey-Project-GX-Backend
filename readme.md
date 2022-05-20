@@ -6,6 +6,8 @@
 
 # Gruppe X Hockey Field (Backend)
 
+![](Field-Hockey-logo.png)
+
 # Description
 
 Hockey Project is a tool that allows the user to have an overview over players positions on the field and can change the
