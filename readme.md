@@ -1,3 +1,9 @@
+![](https://img.shields.io/github/repo-size/GruppeX/Hockey-Project-GX-Backend)
+![](https://img.shields.io/github/contributors/GruppeX/Hockey-Project-GX-Backend)
+![](https://img.shields.io/github/stars/GruppeX/Hockey-Project-GX-Backend)
+![](https://img.shields.io/github/forks/GruppeX/Hockey-Project-GX-Backend)
+![](https://img.shields.io/github/issues/GruppeX/Hockey-Project-GX-Backend)
+
 # Gruppe X Hockey Field (Backend)
 
 # Description
